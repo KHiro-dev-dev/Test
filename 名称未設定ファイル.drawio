@@ -1,75 +1,164 @@
 <mxfile host="app.diagrams.net">
   <diagram name="ページ-1" id="iCtehlwDPtJobWxU6ueQ">
-    <mxGraphModel dx="603" dy="361" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+    <mxGraphModel dx="812" dy="487" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="anF51G2W4-_pOBvvHLF4-32" edge="1" parent="1" source="anF51G2W4-_pOBvvHLF4-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=open;endFill=0;">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="414" y="80" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="anF51G2W4-_pOBvvHLF4-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;企画責任&lt;/b&gt;&lt;/font&gt;&lt;div&gt;鬼頭　光輝&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="81" x="359" as="geometry" />
         </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-16" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;責任者&lt;/b&gt;&lt;/font&gt;&lt;div&gt;鬼頭&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="120" x="354" y="10" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-18" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="A班" vertex="1">
-          <mxGeometry height="150" width="120" x="40" y="200" as="geometry">
-            <mxRectangle height="30" width="60" x="40" y="160" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-19" parent="anF51G2W4-_pOBvvHLF4-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="小谷" vertex="1">
-          <mxGeometry height="30" width="120" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-20" parent="anF51G2W4-_pOBvvHLF4-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="Item 2" vertex="1">
-          <mxGeometry height="30" width="120" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-21" parent="anF51G2W4-_pOBvvHLF4-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="90" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-31" parent="anF51G2W4-_pOBvvHLF4-18" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="120" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-33" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;補佐&lt;/b&gt;&lt;/font&gt;&lt;div&gt;木村&lt;/div&gt;" vertex="1">
-          <mxGeometry height="40" width="120" x="354" y="80" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-36" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="B班" vertex="1">
-          <mxGeometry height="150" width="120" x="200" y="200" as="geometry">
-            <mxRectangle height="30" width="60" x="40" y="160" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-37" parent="anF51G2W4-_pOBvvHLF4-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="小谷" vertex="1">
-          <mxGeometry height="30" width="120" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-38" parent="anF51G2W4-_pOBvvHLF4-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 2" vertex="1">
-          <mxGeometry height="30" width="120" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-39" parent="anF51G2W4-_pOBvvHLF4-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="90" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-40" parent="anF51G2W4-_pOBvvHLF4-36" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="120" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-41" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="C班" vertex="1">
-          <mxGeometry height="150" width="120" x="360" y="200" as="geometry">
-            <mxRectangle height="30" width="60" x="40" y="160" as="alternateBounds" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-42" parent="anF51G2W4-_pOBvvHLF4-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="小谷" vertex="1">
-          <mxGeometry height="30" width="120" y="30" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-43" parent="anF51G2W4-_pOBvvHLF4-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 2" vertex="1">
-          <mxGeometry height="30" width="120" y="60" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-44" parent="anF51G2W4-_pOBvvHLF4-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="90" as="geometry" />
-        </mxCell>
-        <mxCell id="anF51G2W4-_pOBvvHLF4-45" parent="anF51G2W4-_pOBvvHLF4-41" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Item 3" vertex="1">
-          <mxGeometry height="30" width="120" y="120" as="geometry" />
+        <mxCell id="anF51G2W4-_pOBvvHLF4-33" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;補佐&lt;/b&gt;&lt;/font&gt;&lt;div&gt;木村 友哉&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="80" x="359.5" y="80" as="geometry" />
         </mxCell>
         <mxCell id="anF51G2W4-_pOBvvHLF4-47" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="80" y="140" as="sourcePoint" />
-            <mxPoint x="494" y="140" as="targetPoint" />
+            <mxPoint x="100" y="140" as="sourcePoint" />
+            <mxPoint x="720" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-7" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="569.6800000000001" y="140" as="sourcePoint" />
+            <mxPoint x="569.68" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-8" connectable="0" parent="yBFtggekRW9lQkKYWLne-7" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;fontSize=16;" value="責任者" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-12" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;endFill=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280.0000000000001" y="140" as="sourcePoint" />
+            <mxPoint x="280" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-13" connectable="0" parent="yBFtggekRW9lQkKYWLne-12" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;fontSize=16;" value="グループ" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-27" parent="1" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="A班" vertex="1">
+          <mxGeometry height="140" width="120" x="80" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-31" parent="yBFtggekRW9lQkKYWLne-27" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;fontColor=#FF3333;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-32" parent="yBFtggekRW9lQkKYWLne-31" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Zen Kaku Gothic New;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DZen%2BKaku%2BGothic%2BNew;fontColor=#FF3333;fontStyle=1" value="◎" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-33" parent="yBFtggekRW9lQkKYWLne-31" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontStyle=5;fontFamily=Zen Kaku Gothic New;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DZen%2BKaku%2BGothic%2BNew;fontColor=#FF3333;" value="&lt;div&gt;谷子&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-28" parent="yBFtggekRW9lQkKYWLne-27" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-29" parent="yBFtggekRW9lQkKYWLne-28" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="○" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-30" parent="yBFtggekRW9lQkKYWLne-28" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="たにこ" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-34" parent="yBFtggekRW9lQkKYWLne-27" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-35" parent="yBFtggekRW9lQkKYWLne-34" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="総" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-36" parent="yBFtggekRW9lQkKYWLne-34" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="Row 2" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-37" parent="yBFtggekRW9lQkKYWLne-27" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" value="" vertex="1">
+          <mxGeometry height="20" width="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-38" parent="yBFtggekRW9lQkKYWLne-37" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="財" vertex="1">
+          <mxGeometry height="20" width="30" as="geometry">
+            <mxRectangle height="20" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-39" parent="yBFtggekRW9lQkKYWLne-37" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DShippori%2BMincho;" value="Row 3" vertex="1">
+          <mxGeometry height="20" width="90" x="30" as="geometry">
+            <mxRectangle height="20" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-40" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="460" y="200" as="sourcePoint" />
+            <mxPoint x="700" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-55" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;責任者&lt;/b&gt;&lt;/font&gt;&lt;div&gt;鬼頭&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="80" x="480" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-59" edge="1" parent="1" source="anF51G2W4-_pOBvvHLF4-16" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endFill=0;" target="anF51G2W4-_pOBvvHLF4-33" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="400" y="160" as="sourcePoint" />
+            <mxPoint x="450" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-60" parent="1" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="B班" vertex="1">
+          <mxGeometry height="140" width="120" x="239" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-61" parent="yBFtggekRW9lQkKYWLne-60" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;fontColor=#FF3333;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-62" parent="yBFtggekRW9lQkKYWLne-61" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Zen Kaku Gothic New;fontSource=https://fonts.googleapis.com/css?family=Zen+Kaku+Gothic+New;fontColor=#FF3333;fontStyle=1" value="◎" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-63" parent="yBFtggekRW9lQkKYWLne-61" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontStyle=5;fontFamily=Zen Kaku Gothic New;fontSource=https://fonts.googleapis.com/css?family=Zen+Kaku+Gothic+New;fontColor=#FF3333;" value="&lt;div&gt;谷子&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-64" parent="yBFtggekRW9lQkKYWLne-60" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-65" parent="yBFtggekRW9lQkKYWLne-64" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;fontStyle=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="○" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-66" parent="yBFtggekRW9lQkKYWLne-64" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;fontStyle=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="たにこ" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-67" parent="yBFtggekRW9lQkKYWLne-60" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" value="" vertex="1">
+          <mxGeometry height="30" width="120" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-68" parent="yBFtggekRW9lQkKYWLne-67" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="総" vertex="1">
+          <mxGeometry height="30" width="30" as="geometry">
+            <mxRectangle height="30" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-69" parent="yBFtggekRW9lQkKYWLne-67" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Row 2" vertex="1">
+          <mxGeometry height="30" width="90" x="30" as="geometry">
+            <mxRectangle height="30" width="90" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-70" parent="yBFtggekRW9lQkKYWLne-60" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=0;" value="" vertex="1">
+          <mxGeometry height="20" width="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-71" parent="yBFtggekRW9lQkKYWLne-70" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;editable=1;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="財" vertex="1">
+          <mxGeometry height="20" width="30" as="geometry">
+            <mxRectangle height="20" width="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yBFtggekRW9lQkKYWLne-72" parent="yBFtggekRW9lQkKYWLne-70" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;whiteSpace=wrap;html=1;fontFamily=Shippori Mincho;fontSource=https://fonts.googleapis.com/css?family=Shippori+Mincho;" value="Row 3" vertex="1">
+          <mxGeometry height="20" width="90" x="30" as="geometry">
+            <mxRectangle height="20" width="90" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
       </root>
