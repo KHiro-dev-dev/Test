@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>津田沼祭 - Project Prism (Prototype)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          prism: {
+            50:  '#F0F9FF',
+            100: '#E0F2FE',
+            400: '#38BDF8',
+            500: '#0EA5E9',
+            700: '#0369A1',
+          }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+<style>
+  body { font-family: 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif; }
+  [x-cloak] { display: none !important; }
+</style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen flex items-center justify-center p-4" x-data="app()" x-init="init()">
+
+<div class="w-full max-w-sm h-[700px] bg-white dark:bg-gray-800 rounded-3xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-xl relative flex flex-col">
+
+  <!-- ここから画面コンテンツ領域: カードの残り高さいっぱいに広がり、内部だけスクロールする -->
+  <div class="flex-1 overflow-y-auto min-h-0">
+
+  <!-- ===== HOME (./ トップページ) ===== -->
+  <template x-if="tab === 'home'">
+    <div>
+      <div class="bg-prism-700 px-5 pt-5 pb-4 flex items-center justify-between">
+        <div>
+          <div class="text-white text-xl font-medium">津田沼祭</div>
+          <div class="text-sm mt-0.5" style="color:#BAE6FD">Project Prism</div>
+        </div>
+        <button @click="menuOpen = true" aria-label="メニューを開く" class="text-white/90">
+          <i class="ti ti-menu-2 text-2xl"></i>
+        </button>
+      </div>
+
+      <div class="px-5 pt-4">
+        <div class="flex items-center gap-2 mb-2.5">
+          <i class="ti ti-bell text-prism-700 dark:text-prism-400 text-xl"></i>
+          <span class="text-base font-medium text-gray-900 dark:text-gray-100">お知らせ</span>
+        </div>
+        <div class="space-y-2">
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl px-3.5 py-3">
+            <p class="text-[15px] text-gray-800 dark:text-gray-200">セントラルステージで企画がまもなく開始します</p>
+            <p class="text-[13px] text-gray-400 mt-0.5">3分前</p>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl px-3.5 py-3">
+            <p class="text-[15px] text-gray-800 dark:text-gray-200">工学部広場ステージの時間割が一部変更になりました</p>
+            <p class="text-[13px] text-gray-400 mt-0.5">15分前</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 pt-5 pb-2">
+        <div class="flex items-center justify-between mb-2.5">
+          <span class="text-base font-medium text-gray-900 dark:text-gray-100">現在開催中</span>
+          <button @click="tab='sch'" class="text-sm text-prism-700 dark:text-prism-400 flex items-center gap-0.5">
+            詳細を見る<i class="ti ti-chevron-right text-sm"></i>
+          </button>
+        </div>
+        <div class="bg-prism-50 dark:bg-gray-700 rounded-xl p-3.5">
+          <p class="text-[13px] text-prism-700 dark:text-prism-300 mb-2">14:20 現在 ・ <span x-text="nowAll.length"></span>件開催中</p>
+          <div class="space-y-2">
+            <template x-for="(item, idx) in nowVisible" :key="item.name">
+              <div class="flex items-center gap-2.5 bg-white dark:bg-gray-800 rounded-lg px-3 py-2.5">
+                <div class="w-1 h-8 rounded flex-shrink-0" :class="idx === 0 ? 'bg-prism-500' : 'bg-prism-400'"></div>
+                <div class="min-w-0">
+                  <p class="text-[15px] font-medium text-gray-900 dark:text-gray-100 truncate" x-text="item.name"></p>
+                  <p class="text-[13px] text-gray-500 dark:text-gray-400" x-text="item.place + ' ・ ' + item.time"></p>
+                </div>
+              </div>
+            </template>
+          </div>
+          <template x-if="nowOverflow > 0">
+            <button @click="tab='sch'" class="w-full text-center text-[14px] text-prism-700 dark:text-prism-300 mt-2.5 py-1">
+              ほか<span x-text="nowOverflow"></span>件を日程で見る &rsaquo;
+            </button>
+          </template>
+        </div>
+      </div>
+      <div class="h-2"></div>
+    </div>
+  </template>
+
+  <!-- ===== PAMPHLET LIST /pnf ===== -->
+  <template x-if="tab === 'pnf'">
+    <div>
+      <div class="px-5 pt-5 pb-3">
+        <div class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">企画一覧</div>
+        <div class="w-full flex items-center gap-2.5 bg-gray-100 dark:bg-gray-700 rounded-full px-3.5 py-2.5">
+          <i class="ti ti-search text-gray-400 text-lg"></i>
+          <button @click="searchOpen = true" class="text-[15px] text-gray-400 flex-1 text-left truncate" x-text="keyword || '検索...'"></button>
+          <button @click="menuOpen = true" aria-label="メニューを開く">
+            <i class="ti ti-menu-2 text-prism-700 dark:text-prism-400 text-lg"></i>
+          </button>
+        </div>
+        <div class="flex items-center justify-between mt-2 px-1">
+          <span class="text-[13px] text-gray-400" x-text="filteredEvents.length + '件表示中'"></span>
+          <button x-show="hasActiveFilters" @click="resetFilters()" class="text-[13px] text-prism-700 dark:text-prism-400">絞り込みを解除</button>
+        </div>
+      </div>
+
+      <div class="px-5 pb-4 space-y-2.5 max-h-[460px] overflow-y-auto">
+        <template x-if="filteredEvents.length === 0">
+          <div class="text-center py-10">
+            <i class="ti ti-mood-empty text-4xl text-gray-300 dark:text-gray-600"></i>
+            <p class="text-[15px] text-gray-400 mt-2">条件に一致する企画がありません</p>
+          </div>
+        </template>
+        <template x-for="item in filteredEvents" :key="item.name">
+          <div @click="openDetail(item)" class="flex gap-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-2.5 cursor-pointer active:bg-gray-100 dark:active:bg-gray-700">
+            <div class="w-16 h-16 rounded-xl bg-prism-100 dark:bg-gray-600 flex items-center justify-center flex-shrink-0">
+              <i class="ti ti-photo text-prism-700 dark:text-prism-300 text-2xl"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-[15px] font-medium text-gray-900 dark:text-gray-100" x-text="item.name"></p>
+              <div class="flex gap-1.5 my-1">
+                <template x-for="tag in item.tags" :key="tag">
+                  <span class="text-[12px] px-2 py-0.5 rounded-full" :class="tagColor(tag)" x-text="tag"></span>
+                </template>
+              </div>
+              <p class="text-[13px] text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="ti ti-map-pin text-sm"></i><span x-text="item.place"></span>
+              </p>
+              <p class="text-[13px] text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <i class="ti ti-clock text-sm"></i><span x-text="(item.day===1?'1日目':'2日目') + ' ' + item.start + '-' + item.end"></span>
+              </p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===== SCHEDULE /sch (comp.SC1) ===== -->
+  <template x-if="tab === 'sch'">
+    <div>
+      <div class="px-5 pt-5 pb-3">
+        <div class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">日程</div>
+
+        <div class="flex gap-2 mb-3">
+          <button @click="scheduleDay = 1"
+                  class="text-[15px] px-4 py-1.5 rounded-full border"
+                  :class="scheduleDay===1 ? 'bg-prism-700 text-white border-prism-700' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'">1日目</button>
+          <button @click="scheduleDay = 2"
+                  class="text-[15px] px-4 py-1.5 rounded-full border"
+                  :class="scheduleDay===2 ? 'bg-prism-700 text-white border-prism-700' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'">2日目</button>
+        </div>
+
+        <div class="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5" style="scrollbar-width:none">
+          <button @click="scheduleStage = null"
+                  class="text-[14px] px-3 py-1 rounded-full border flex-shrink-0"
+                  :class="!scheduleStage ? 'bg-prism-500 text-white border-prism-500' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600'">すべて</button>
+          <template x-for="a in areas" :key="a">
+            <button @click="scheduleStage = scheduleStage===a ? null : a"
+                    class="text-[14px] px-3 py-1 rounded-full border flex-shrink-0"
+                    :class="scheduleStage===a ? 'bg-prism-500 text-white border-prism-500' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600'"
+                    x-text="a"></button>
+          </template>
+        </div>
+      </div>
+
+      <div class="px-5 pb-4 space-y-2 max-h-[480px] overflow-y-auto">
+        <template x-if="scheduleList.length === 0">
+          <div class="text-center py-10">
+            <i class="ti ti-calendar-off text-4xl text-gray-300 dark:text-gray-600"></i>
+            <p class="text-[15px] text-gray-400 mt-2">該当する企画がありません</p>
+          </div>
+        </template>
+        <template x-for="item in scheduleList" :key="item.name">
+          <div @click="openDetail(item)"
+               class="flex gap-3 rounded-2xl p-2.5 cursor-pointer"
+               :class="isNow(item) ? 'bg-prism-50 dark:bg-gray-700 ring-1 ring-prism-300 dark:ring-prism-500' : 'bg-gray-50 dark:bg-gray-700/50'">
+            <div class="w-1 rounded flex-shrink-0" :class="isNow(item) ? 'bg-prism-500' : 'bg-gray-300 dark:bg-gray-600'"></div>
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-2">
+                <p class="text-[14px] text-gray-500 dark:text-gray-400" x-text="item.start + '-' + item.end"></p>
+                <span x-show="isNow(item)" class="text-[12px] bg-prism-500 text-white px-1.5 py-0.5 rounded-full">開催中</span>
+              </div>
+              <p class="text-[15px] font-medium text-gray-900 dark:text-gray-100 mt-0.5" x-text="item.name"></p>
+              <p class="text-[13px] text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-0.5">
+                <i class="ti ti-map-pin text-sm"></i><span x-text="item.place"></span>
+              </p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===== PLACEHOLDER (未実装の画面) ===== -->
+  <template x-if="tab === 'map'">
+    <div class="flex flex-col items-center justify-center h-[560px] text-center px-8">
+      <i class="ti ti-tools text-4xl text-gray-300 dark:text-gray-600 mb-3"></i>
+      <p class="text-base text-gray-400 dark:text-gray-500">マップ画面は準備中です</p>
+    </div>
+  </template>
+
+
+  </div>
+  <!-- ここまで画面コンテンツ領域 -->
+
+  <!-- ===== BOTTOM NAV (comp.M0) ===== -->
+  <div class="flex-shrink-0 flex justify-around py-2.5 border-t border-gray-100 dark:border-gray-700">
+    <button @click="tab='home'" class="flex flex-col items-center gap-0.5" :class="tab==='home' ? 'text-prism-700 dark:text-prism-400' : 'text-gray-400'">
+      <i class="ti ti-home text-2xl"></i><span class="text-[13px]">ホーム</span>
+    </button>
+    <button @click="tab='pnf'" class="flex flex-col items-center gap-0.5" :class="tab==='pnf' ? 'text-prism-700 dark:text-prism-400' : 'text-gray-400'">
+      <i class="ti ti-book-2 text-2xl"></i><span class="text-[13px]">パンフレット</span>
+    </button>
+    <button @click="tab='sch'" class="flex flex-col items-center gap-0.5" :class="tab==='sch' ? 'text-prism-700 dark:text-prism-400' : 'text-gray-400'">
+      <i class="ti ti-calendar text-2xl"></i><span class="text-[13px]">日程</span>
+    </button>
+    <button @click="tab='map'" class="flex flex-col items-center gap-0.5" :class="tab==='map' ? 'text-prism-700 dark:text-prism-400' : 'text-gray-400'">
+      <i class="ti ti-map-pin text-2xl"></i><span class="text-[13px]">マップ</span>
+    </button>
+  </div>
+
+  <!-- ===== MENU DRAWER (comp.M1) ===== -->
+  <div x-show="menuOpen" x-cloak class="absolute inset-0 bg-black/30 z-10" @click="menuOpen=false" x-transition.opacity></div>
+  <div x-show="menuOpen" x-cloak
+       class="absolute top-0 right-0 h-full w-[85%] bg-white dark:bg-gray-800 shadow-2xl z-20 overflow-y-auto"
+       x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+       x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-700">
+      <span class="text-lg font-medium text-gray-900 dark:text-gray-100">メニュー</span>
+      <button @click="menuOpen=false" aria-label="メニューを閉じる"><i class="ti ti-x text-xl text-gray-500"></i></button>
+    </div>
+
+    <div class="px-5 pt-4 pb-1 text-sm text-gray-400">表示設定</div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-photo text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">航空写真表示</span></div>
+      <button @click="aerial = !aerial" class="w-9 h-5 rounded-full relative transition-colors" :class="aerial ? 'bg-prism-500' : 'bg-gray-300 dark:bg-gray-600'">
+        <span class="w-4 h-4 bg-white rounded-full absolute top-0.5 transition-all" :class="aerial ? 'right-0.5' : 'left-0.5'"></span>
+      </button>
+    </div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-moon text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">ダークモード</span></div>
+      <button @click="dark = !dark" class="w-9 h-5 rounded-full relative transition-colors" :class="dark ? 'bg-prism-500' : 'bg-gray-300 dark:bg-gray-600'">
+        <span class="w-4 h-4 bg-white rounded-full absolute top-0.5 transition-all" :class="dark ? 'right-0.5' : 'left-0.5'"></span>
+      </button>
+    </div>
+
+    <div class="px-5 pt-4 pb-1 text-sm text-gray-400 border-t border-gray-100 dark:border-gray-700 mt-1">言語設定</div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-language text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">言語</span></div>
+      <button @click="lang = lang === '日本語' ? 'English' : '日本語'" class="text-[15px] text-gray-500" x-text="lang + ' ⌄'"></button>
+    </div>
+
+    <div class="px-5 pt-4 pb-1 text-sm text-gray-400 border-t border-gray-100 dark:border-gray-700 mt-1">アプリについて</div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-help text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">使い方</span></div>
+      <i class="ti ti-chevron-right text-gray-300"></i>
+    </div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-mail text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">お問い合わせ</span></div>
+      <i class="ti ti-chevron-right text-gray-300"></i>
+    </div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-file-text text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">利用規約・プライバシーポリシー</span></div>
+      <i class="ti ti-chevron-right text-gray-300"></i>
+    </div>
+    <div class="flex items-center justify-between px-5 py-3">
+      <div class="flex items-center gap-3"><i class="ti ti-info-circle text-gray-500 text-xl"></i><span class="text-base text-gray-800 dark:text-gray-100">バージョン情報</span></div>
+      <span class="text-[15px] text-gray-400">1.0.0</span>
+    </div>
+  </div>
+
+  <!-- ===== SEARCH WINDOW (./searchWindow) ===== -->
+  <div x-show="searchOpen" x-cloak class="absolute inset-0 bg-black/30 z-10" @click="searchOpen=false" x-transition.opacity></div>
+  <div x-show="searchOpen" x-cloak
+       class="absolute inset-0 bg-white dark:bg-gray-800 shadow-2xl z-20 flex flex-col"
+       x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full">
+
+    <!-- 固定ヘッダー: タイトル+閉じるボタン、キーワード入力、ジャンル -->
+    <div class="p-5 pb-3 flex-shrink-0 border-b border-gray-100 dark:border-gray-700">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-lg font-medium text-gray-900 dark:text-gray-100">検索</span>
+        <button @click="searchOpen=false" aria-label="検索ウィンドウを閉じる"><i class="ti ti-x text-xl text-gray-500"></i></button>
+      </div>
+
+      <div class="flex items-center gap-2.5 bg-gray-100 dark:bg-gray-700 rounded-full px-3.5 py-2.5 mb-4">
+        <i class="ti ti-search text-gray-400 text-lg"></i>
+        <input type="text" x-model="keyword" placeholder="企画名・団体名で検索"
+               class="text-[15px] bg-transparent flex-1 outline-none text-gray-800 dark:text-gray-100 placeholder-gray-400">
+        <button x-show="keyword" @click="keyword=''"><i class="ti ti-x text-gray-400 text-base"></i></button>
+      </div>
+
+      <p class="text-base font-medium text-gray-900 dark:text-gray-100 mb-2.5">検索したいジャンルを選択</p>
+      <div class="flex flex-wrap gap-2">
+        <template x-for="g in genres" :key="g">
+          <button @click="toggleGenre(g)"
+                  class="text-[15px] px-4 py-1.5 rounded-full border"
+                  :class="selectedGenres.includes(g) ? 'bg-prism-700 text-white border-prism-700' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'"
+                  x-text="g"></button>
+        </template>
+      </div>
+    </div>
+
+    <!-- スクロール領域: オプションだけがここで伸び縮みする -->
+    <div class="flex-1 overflow-y-auto px-5 py-3 min-h-0">
+      <button @click="optionsOpen = !optionsOpen" class="flex items-center gap-1.5 text-[15px] text-prism-700 dark:text-prism-400 mb-3">
+        <i class="ti ti-adjustments-horizontal text-lg"></i>オプション
+        <i class="text-sm transition-transform" :class="optionsOpen ? 'ti ti-chevron-up' : 'ti ti-chevron-down'"></i>
+      </button>
+
+      <div x-show="optionsOpen" x-cloak x-collapse class="space-y-4">
+
+        <div>
+          <p class="text-[14px] text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1"><i class="ti ti-map-pin text-base"></i>エリア検索</p>
+          <div class="flex flex-wrap gap-2">
+            <template x-for="a in areas" :key="a">
+              <button @click="toggleArea(a)"
+                      class="text-[14px] px-3 py-1 rounded-full border"
+                      :class="selectedAreas.includes(a) ? 'bg-prism-500 text-white border-prism-500' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600'"
+                      x-text="a"></button>
+            </template>
+          </div>
+          <p class="text-[12px] text-gray-400 mt-1.5">※地図から範囲選択する機能は今後実装予定です</p>
+        </div>
+
+        <div>
+          <p class="text-[14px] text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1"><i class="ti ti-calendar text-base"></i>開催日</p>
+          <div class="flex gap-2">
+            <button @click="selectedDay = selectedDay===1 ? null : 1"
+                    class="text-[14px] px-3 py-1 rounded-full border"
+                    :class="selectedDay===1 ? 'bg-prism-500 text-white border-prism-500' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600'">1日目</button>
+            <button @click="selectedDay = selectedDay===2 ? null : 2"
+                    class="text-[14px] px-3 py-1 rounded-full border"
+                    :class="selectedDay===2 ? 'bg-prism-500 text-white border-prism-500' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600'">2日目</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-[14px] text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1"><i class="ti ti-clock text-base"></i>時間帯検索</p>
+          <div class="flex items-center gap-2">
+            <input type="time" x-model="timeFrom" class="text-[14px] border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+            <span class="text-[14px] text-gray-400">〜</span>
+            <input type="time" x-model="timeTo" class="text-[14px] border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 固定フッター: 検索ボタン -->
+    <div class="p-5 pt-3 flex-shrink-0 border-t border-gray-100 dark:border-gray-700">
+      <button @click="searchOpen=false; tab='pnf'" class="w-full bg-prism-700 text-white text-base font-medium rounded-xl py-3">
+        検索<span x-show="filteredEvents.length" x-text="'（' + filteredEvents.length + '件）'"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== EVENT DETAIL (comp.D) ===== -->
+  <div x-show="detailOpen" x-cloak
+       class="absolute inset-0 bg-white dark:bg-gray-800 z-30 flex flex-col"
+       x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+       x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
+    <div class="flex-1 overflow-y-auto" x-show="selectedEvent">
+
+      <!-- 画像〜場所/時間〜共有ボタン〜罫線までを1つの背景レイヤーで覆う -->
+      <div class="relative flex-shrink-0 overflow-hidden">
+        <!-- 背景: 団体アップロード画像(仮のプレースホルダー)。上下(垂直)のグラデーション -->
+        <div class="absolute inset-0 bg-gradient-to-b from-sky-300 via-sky-100 to-amber-50"></div>
+        <!-- 画像を下方向へ白くフェードさせる層。罫線の位置まで覆う -->
+        <div class="absolute inset-0 pointer-events-none
+                    bg-[linear-gradient(to_bottom,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_35%,rgba(255,255,255,1)_100%)]
+                    dark:bg-[linear-gradient(to_bottom,rgba(31,41,55,0)_0%,rgba(31,41,55,0)_35%,rgba(31,41,55,1)_100%)]"></div>
+
+        <!-- 前景コンテンツ -->
+        <div class="relative">
+          <div class="h-40 flex items-center justify-center">
+            <i class="ti ti-photo text-white/50 text-6xl"></i>
+          </div>
+
+          <button @click="detailOpen=false" aria-label="戻る"
+                  class="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/80 dark:bg-gray-900/70 backdrop-blur flex items-center justify-center shadow">
+            <i class="ti ti-arrow-left text-gray-700 dark:text-gray-200"></i>
+          </button>
+
+          <div class="px-5 flex items-end justify-between gap-3">
+            <p class="text-3xl font-bold text-prism-700 leading-tight" x-text="selectedEvent?.name"></p>
+            <p class="text-sm text-gray-700 dark:text-gray-200 pb-1 text-right flex-shrink-0" x-text="selectedEvent?.org"></p>
+          </div>
+
+          <!-- 場所・時間・共有/地図ボタン -->
+          <div class="px-5 pt-3">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1.5">
+                <p class="text-[14px] text-gray-600 dark:text-gray-300 flex items-center gap-1.5">
+                  <i class="ti ti-map-pin text-prism-600"></i><span x-text="selectedEvent?.place"></span>
+                </p>
+                <p class="text-[14px] text-gray-600 dark:text-gray-300 flex items-center gap-1.5">
+                  <i class="ti ti-clock text-prism-600"></i>
+                  <span x-text="selectedEvent ? (selectedEvent.day===1?'1日目 ':'2日目 ') + selectedEvent.start + ' - ' + selectedEvent.end : ''"></span>
+                </p>
+              </div>
+              <div class="flex gap-5 flex-shrink-0">
+                <button class="flex flex-col items-center gap-1 text-prism-600">
+                  <i class="ti ti-share text-xl"></i><span class="text-[12px] text-gray-500 dark:text-gray-400">共有</span>
+                </button>
+                <button @click="tab='map'; detailOpen=false" class="flex flex-col items-center gap-1 text-prism-600">
+                  <i class="ti ti-map-pin text-xl"></i><span class="text-[12px] text-gray-500 dark:text-gray-400">地図で表示</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 罫線: 中央部が青、両端にかけて透明になるグラデーション。「説明」をその上に中央寄せで重ねる -->
+          <div class="relative mx-5 mt-6">
+            <div class="h-px bg-[linear-gradient(to_right,transparent,#0EA5E9,transparent)]"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="bg-white dark:bg-gray-800 px-3 text-base font-medium text-gray-900 dark:text-gray-100">説明</span>
+            </div>
+          </div>
+          <div class="h-4"></div>
+        </div>
+      </div>
+
+      <div class="px-5">
+        <p class="text-[15px] leading-relaxed text-gray-700 dark:text-gray-300 pb-6" x-text="selectedEvent?.desc"></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+  function app() {
+    return {
+      tab: 'home',
+      menuOpen: false,
+      searchOpen: false,
+      detailOpen: false,
+      selectedEvent: null,
+
+      scheduleDay: 1,
+      scheduleStage: null,
+      currentTime: '14:20',
+      currentDay: 1,
+      optionsOpen: false,
+      aerial: false,
+      dark: false,
+      lang: '日本語',
+
+      keyword: '',
+      genres: ['飲食', '屋外', '屋内', 'ステージ', '体験型', '展示型'],
+      selectedGenres: [],
+      areas: ['4号館', '5号館', '3号館', '工学部広場', 'セントラル', '図書館前', '安田講堂'],
+      selectedAreas: [],
+      selectedDay: null,
+      timeFrom: '',
+      timeTo: '',
+
+      events: [
+        { name: '唐揚げ専門店',       tags: ['飲食','屋内'],       building: '4号館',     place: '4号館3F 201教室',     day: 1, start: '10:00', end: '16:00',
+          org: '学友会執行委員会', desc: '当模擬店はお腹を満たして文化祭をもっと楽しむための場所です。注文をしていただくと料理が出てきます。これを食べると、なんとお腹が空いていない状態になります！これこそが「満腹」というものです。' },
+        { name: 'たこ焼き横丁',       tags: ['飲食','屋外'],       building: '5号館',     place: '5号館前 広場',        day: 1, start: '09:00', end: '17:00',
+          org: '調理サークル',     desc: '外はカリッと、中はとろとろのたこ焼きをその場で焼いて提供します。ソース・マヨ・青のりはお好みで調整可能です。' },
+        { name: '書道パフォーマンス', tags: ['ステージ'],          building: '工学部広場', place: '工学部広場ステージ',  day: 1, start: '12:15', end: '13:00',
+          org: '書道部',           desc: '大きな紙に音楽に合わせて一文字を書き上げるパフォーマンスです。当日のテーマは来場者の投票で決定します。' },
+        { name: '写真部展示',         tags: ['展示型','屋内'],     building: '3号館',     place: '3号館2F',             day: 1, start: '09:00', end: '18:00',
+          org: '写真部',           desc: '部員が1年間かけて撮影した作品を展示します。学内の四季をテーマにした写真を中心に、約50点を展示予定です。' },
+        { name: 'クレープ屋さん',     tags: ['飲食','屋外'],       building: '5号館',     place: '5号館前 広場',        day: 2, start: '10:00', end: '15:00',
+          org: '国際交流サークル', desc: '国ごとに味付けの違うクレープを提供します。売上の一部は留学生支援に充てられます。' },
+        { name: '軽音サークルライブ', tags: ['ステージ','体験型'], building: 'セントラル', place: 'セントラルステージ',  day: 2, start: '13:00', end: '14:00',
+          org: '軽音楽サークル',   desc: '有志バンドによるライブステージです。カバー曲中心の構成で、最後にはオリジナル曲も披露予定です。' },
+      ],
+
+      nowAll: [
+        { name: '東大フィル第29回五月祭演奏会', place: '安田講堂',           time: '14:20-15:50' },
+        { name: '東大踊々夢',                    place: '工学部広場ステージ', time: '14:40-16:00' },
+        { name: '5号館前ステージライブ',         place: '5号館前ステージ',    time: '14:00-14:30' },
+        { name: '軽音サークル演奏',              place: '図書館前ステージ',   time: '14:10-14:40' },
+        { name: '模擬店案内所',                  place: '3号館前',            time: '14:00-17:00' },
+      ],
+
+      get nowVisible() { return this.nowAll.slice(0, 3); },
+      get nowOverflow() { return Math.max(0, this.nowAll.length - 3); },
+
+      get hasActiveFilters() {
+        return this.keyword || this.selectedGenres.length || this.selectedAreas.length || this.selectedDay || this.timeFrom || this.timeTo;
+      },
+
+      get filteredEvents() {
+        return this.events.filter(e => {
+          const genreOk = this.selectedGenres.length === 0 || e.tags.some(t => this.selectedGenres.includes(t));
+          const kw = this.keyword.trim();
+          const keywordOk = !kw || e.name.includes(kw) || e.place.includes(kw);
+          const areaOk = this.selectedAreas.length === 0 || this.selectedAreas.includes(e.building);
+          const dayOk = !this.selectedDay || e.day === this.selectedDay;
+          const timeOk = (!this.timeFrom || e.end >= this.timeFrom) && (!this.timeTo || e.start <= this.timeTo);
+          return genreOk && keywordOk && areaOk && dayOk && timeOk;
+        });
+      },
+
+      get scheduleList() {
+        return this.events
+          .filter(e => e.day === this.scheduleDay && (!this.scheduleStage || e.building === this.scheduleStage))
+          .slice()
+          .sort((a, b) => a.start.localeCompare(b.start));
+      },
+      isNow(item) {
+        return item.day === this.currentDay && item.start <= this.currentTime && this.currentTime <= item.end;
+      },
+
+      tagColor(tag) {
+        const map = {
+          '飲食': 'bg-red-100 text-red-700',
+          '屋内': 'bg-indigo-100 text-indigo-700',
+          '屋外': 'bg-green-100 text-green-700',
+          'ステージ': 'bg-purple-100 text-purple-700',
+          '展示型': 'bg-yellow-100 text-yellow-700',
+          '体験型': 'bg-pink-100 text-pink-700',
+        };
+        return map[tag] || 'bg-gray-100 text-gray-700';
+      },
+      openDetail(item) {
+        this.selectedEvent = item;
+        this.detailOpen = true;
+      },
+      toggleGenre(g) {
+        this.selectedGenres = this.selectedGenres.includes(g)
+          ? this.selectedGenres.filter(x => x !== g)
+          : [...this.selectedGenres, g];
+      },
+      toggleArea(a) {
+        this.selectedAreas = this.selectedAreas.includes(a)
+          ? this.selectedAreas.filter(x => x !== a)
+          : [...this.selectedAreas, a];
+      },
+      resetFilters() {
+        this.keyword = '';
+        this.selectedGenres = [];
+        this.selectedAreas = [];
+        this.selectedDay = null;
+        this.timeFrom = '';
+        this.timeTo = '';
+      },
+      init() {
+        this.$watch('dark', v => document.documentElement.classList.toggle('dark', v));
+      }
+    }
+  }
+</script>
+</body>
+</html>
