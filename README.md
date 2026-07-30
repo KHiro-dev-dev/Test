@@ -1,11 +1,9 @@
-<div style="color:#d9534f; border:1px solid #d9534f; font-size:16pt; background:#fdf7f7; border-radius:7px; padding:12px;filter: drop-shadow(0 0 0.75rem crimson);">
-  <div style="font-weight:bold; text-align:center; margin-bottom:8px;">⚠️ 重要なお願い（コード共有・複製禁止）</div>
-  <p style="font-size:10pt; color:#333; margin:0; line-height:1.5;">
-    本プロジェクトはセキュリティ保護および脆弱性漏洩防止のため、一部の関係者にのみ限定公開しています。<br>
-    掲載されているコードの<b>コピー・無断転載・第三者への共有・外部への拡散は固くお断りいたします。</b>
-  </p>
-</div>
-
+> [!CAUTION]
+> **【重要】コードの共有・転載に関するお願い**
+> 
+> 本プロジェクトにはセキュリティ上の脆弱性防止に関する重要なコードが含まれています。
+> セキュリティ保護の観点から、**本リポジトリのコードや内容をコピー・転載・第三者へ共有・外部公開することは固くお断りいたします。**
+> 許可されたメンバー内のみでの利用・閲覧にとどめていただくようご協力をお願いいたします。
 ## 進捗報告
 7/23 デザイン案[^1]作成開始 <br>
 7/29 デザイン案[^1]完成。モック品(仮)作成。~~GithubPagesにて公開~~<br>
