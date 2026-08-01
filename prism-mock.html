@@ -26,6 +26,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.14.1/dist/cdn.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <style>
   body { font-family: 'Hiragino Sans', 'Noto Sans JP', system-ui, sans-serif; }
   [x-cloak] { display: none !important; }
@@ -205,11 +207,59 @@
     </div>
   </template>
 
-  <!-- ===== PLACEHOLDER (未実装の画面) ===== -->
+  <!-- ===== MAP /map ===== -->
   <template x-if="tab === 'map'">
-    <div class="flex flex-col items-center justify-center h-[560px] text-center px-8">
-      <i class="ti ti-tools text-4xl text-gray-300 dark:text-gray-600 mb-3"></i>
-      <p class="text-base text-gray-400 dark:text-gray-500">マップ画面は準備中です</p>
+    <div class="h-full relative">
+      <div class="absolute inset-0" x-init="initMap($el)"></div>
+
+      <!-- 航空写真トグル(メニューのaerialと同じ状態を共有) -->
+      <button @click="toggleMapStyle()" aria-label="航空写真表示を切り替え"
+              class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full shadow flex items-center justify-center"
+              :class="aerial ? 'bg-prism-700 text-white' : 'bg-white dark:bg-gray-800 text-prism-700 dark:text-prism-300'">
+        <i class="ti ti-photo text-xl"></i>
+      </button>
+
+      <p class="absolute top-4 left-4 z-10 bg-white/90 dark:bg-gray-800/90 text-[13px] text-gray-500 dark:text-gray-400 px-3 py-1.5 rounded-full">
+        座標は仮の概算値です
+      </p>
+
+      <!-- 建物タップ時のボトムシート -->
+      <div x-show="selectedBuilding" x-cloak
+           class="absolute inset-x-0 bottom-0 bg-white dark:bg-gray-800 rounded-t-3xl shadow-2xl z-20 max-h-[75%] flex flex-col"
+           x-transition:enter="transition ease-out duration-200" x-transition:enter-start="translate-y-full" x-transition:enter-end="translate-y-0"
+           x-transition:leave="transition ease-in duration-150" x-transition:leave-start="translate-y-0" x-transition:leave-end="translate-y-full">
+
+        <div class="flex items-center justify-between px-5 py-4 flex-shrink-0 border-b border-gray-100 dark:border-gray-700">
+          <span class="text-xl font-medium text-gray-900 dark:text-gray-100" x-text="selectedBuilding"></span>
+          <button @click="selectedBuilding=null" aria-label="閉じる"><i class="ti ti-x text-2xl text-gray-500"></i></button>
+        </div>
+
+        <div class="px-5 pt-3 flex gap-2 flex-shrink-0" x-show="buildingFloors.length > 1">
+          <template x-for="f in buildingFloors" :key="f">
+            <button @click="selectedFloor = f"
+                    class="text-base px-3 py-1 rounded-full border"
+                    :class="selectedFloor===f ? 'bg-prism-700 text-white border-prism-700' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600'"
+                    x-text="f + 'F'"></button>
+          </template>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-5 py-3 space-y-2">
+          <template x-for="item in buildingEvents" :key="item.name">
+            <div @click="selectedBuilding=null; openDetail(item)" class="flex gap-3 bg-gray-50 dark:bg-gray-700/50 rounded-2xl p-2.5 cursor-pointer">
+              <div class="w-14 h-14 rounded-xl bg-prism-100 dark:bg-gray-600 flex items-center justify-center flex-shrink-0">
+                <i class="ti ti-photo text-prism-700 dark:text-prism-300 text-xl"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-[15px] font-medium text-gray-900 dark:text-gray-100" x-text="item.name"></p>
+                <p class="text-[13px] text-gray-500 dark:text-gray-400" x-text="item.place"></p>
+              </div>
+            </div>
+          </template>
+          <template x-if="buildingEvents.length === 0">
+            <p class="text-[13px] text-gray-400 text-center py-6">この建物の企画情報はまだありません</p>
+          </template>
+        </div>
+      </div>
     </div>
   </template>
 
@@ -470,14 +520,58 @@
       timeFrom: '',
       timeTo: '',
 
+      // ===== マップ関連 =====
+      _map: null,
+      selectedBuilding: null,
+      selectedFloor: null,
+      // 千葉工業大学 津田沼キャンパス(習志野市津田沼2-17-1)付近の概算座標。
+      // 建物ごとの正確な緯度経度が揃い次第、lat/lngを差し替える。
+      buildings: [
+        { name: '4号館',     lat: 35.6874, lng: 139.9722 },
+        { name: '5号館',     lat: 35.6876, lng: 139.9726 },
+        { name: '3号館',     lat: 35.6872, lng: 139.9720 },
+        { name: '工学部広場', lat: 35.6875, lng: 139.9730 },
+        { name: 'セントラル', lat: 35.6870, lng: 139.9724 },
+        { name: '図書館前',   lat: 35.6878, lng: 139.9721 },
+        { name: '安田講堂',   lat: 35.6873, lng: 139.9728 },
+      ],
+      mapStyles: {
+        osm: {
+          version: 8,
+          sources: {
+            osm: {
+              type: 'raster',
+              tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+              tileSize: 256,
+              attribution: '&copy; OpenStreetMap contributors'
+            }
+          },
+          layers: [{ id: 'osm-layer', type: 'raster', source: 'osm' }]
+        },
+        satellite: {
+          version: 8,
+          sources: {
+            sat: {
+              type: 'raster',
+              tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+              tileSize: 256,
+              attribution: 'Esri, Maxar, Earthstar Geographics'
+            }
+          },
+          layers: [{ id: 'sat-layer', type: 'raster', source: 'sat' }]
+        }
+      },
+
       events: [
-        { name: '唐揚げ専門店',       tags: ['飲食','屋内'],       building: '4号館',     place: '4号館3F 201教室',     day: 1, start: '10:00', end: '16:00',
+        { name: '唐揚げ専門店',       tags: ['飲食','屋内'],       building: '4号館',     place: '4号館3F 201教室',     day: 1, start: '10:00', end: '16:00', floor: 3,
           org: '学友会執行委員会', desc: '当模擬店はお腹を満たして文化祭をもっと楽しむための場所です。注文をしていただくと料理が出てきます。これを食べると、なんとお腹が空いていない状態になります！これこそが「満腹」というものです。' },
+        { name: '占いの館',           tags: ['体験型','屋内'],     building: '4号館',     place: '4号館2F 205教室',     day: 1, start: '10:00', end: '16:00', floor: 2,
+          org: 'オカルト研究会',   desc: 'タロット・手相・星占いから選んでご案内します。1回5分程度、当日整理券を配布します。' },
         { name: 'たこ焼き横丁',       tags: ['飲食','屋外'],       building: '5号館',     place: '5号館前 広場',        day: 1, start: '09:00', end: '17:00',
           org: '調理サークル',     desc: '外はカリッと、中はとろとろのたこ焼きをその場で焼いて提供します。ソース・マヨ・青のりはお好みで調整可能です。' },
         { name: '書道パフォーマンス', tags: ['ステージ'],          building: '工学部広場', place: '工学部広場ステージ',  day: 1, start: '12:15', end: '13:00',
           org: '書道部',           desc: '大きな紙に音楽に合わせて一文字を書き上げるパフォーマンスです。当日のテーマは来場者の投票で決定します。' },
-        { name: '写真部展示',         tags: ['展示型','屋内'],     building: '3号館',     place: '3号館2F',             day: 1, start: '09:00', end: '18:00',
+        { name: '写真部展示',         tags: ['展示型','屋内'],     building: '3号館',     place: '3号館2F',             day: 1, start: '09:00', end: '18:00', floor: 2,
           org: '写真部',           desc: '部員が1年間かけて撮影した作品を展示します。学内の四季をテーマにした写真を中心に、約50点を展示予定です。' },
         { name: 'クレープ屋さん',     tags: ['飲食','屋外'],       building: '5号館',     place: '5号館前 広場',        day: 2, start: '10:00', end: '15:00',
           org: '国際交流サークル', desc: '国ごとに味付けの違うクレープを提供します。売上の一部は留学生支援に充てられます。' },
@@ -522,6 +616,49 @@
         return item.day === this.currentDay && item.start <= this.currentTime && this.currentTime <= item.end;
       },
 
+      get buildingFloors() {
+        if (!this.selectedBuilding) return [];
+        const floors = this.events
+          .filter(e => e.building === this.selectedBuilding && e.floor)
+          .map(e => e.floor);
+        return [...new Set(floors)].sort((a, b) => a - b);
+      },
+      get buildingEvents() {
+        if (!this.selectedBuilding) return [];
+        return this.events.filter(e => {
+          if (e.building !== this.selectedBuilding) return false;
+          if (this.buildingFloors.length > 1) return e.floor === this.selectedFloor;
+          return true;
+        });
+      },
+      openBuilding(name) {
+        this.selectedBuilding = name;
+        const floors = this.events.filter(e => e.building === name && e.floor).map(e => e.floor);
+        const uniqueFloors = [...new Set(floors)].sort((a, b) => a - b);
+        this.selectedFloor = uniqueFloors.length ? uniqueFloors[0] : null;
+      },
+      initMap(el) {
+        if (typeof maplibregl === 'undefined' || this._map) return;
+        const map = new maplibregl.Map({
+          container: el,
+          style: this.aerial ? this.mapStyles.satellite : this.mapStyles.osm,
+          center: [139.9724, 35.6873],
+          zoom: 17.5,
+        });
+        map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+        this.buildings.forEach(b => {
+          const el = document.createElement('div');
+          el.className = 'w-9 h-9 rounded-full bg-prism-700 border-2 border-white shadow-lg flex items-center justify-center text-white text-sm font-bold cursor-pointer';
+          el.textContent = b.name.slice(0, 1);
+          el.addEventListener('click', () => this.openBuilding(b.name));
+          new maplibregl.Marker({ element: el }).setLngLat([b.lng, b.lat]).addTo(map);
+        });
+        this._map = map;
+      },
+      toggleMapStyle() {
+        this.aerial = !this.aerial;
+      },
+
       tagColor(tag) {
         const map = {
           '飲食': 'bg-red-100 text-red-700',
@@ -557,6 +694,9 @@
       },
       init() {
         this.$watch('dark', v => document.documentElement.classList.toggle('dark', v));
+        this.$watch('aerial', v => {
+          if (this._map) this._map.setStyle(v ? this.mapStyles.satellite : this.mapStyles.osm);
+        });
       }
     }
   }
